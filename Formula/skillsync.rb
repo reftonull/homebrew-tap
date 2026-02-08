@@ -2,25 +2,26 @@ class Skillsync < Formula
   desc "Sync skills and configuration across development tools"
   homepage "https://github.com/reftonull/skillsync"
   license "MIT"
-  version "0.1.0"
+  version "0.1.1"
 
   on_macos do
     url "https://github.com/reftonull/skillsync/releases/download/v#{version}/skillsync-macos-universal.tar.gz"
-    sha256 "32f3bafc03c9cebf32f628d5aac765e6b3aa6e71ac824a6f0ca02e6c377199c6"
+    sha256 "ac3450e1027d5d1318f6cd2e76d8f13d4831694520fd14077fa1e4fe92a7a600"
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/reftonull/skillsync/releases/download/v#{version}/skillsync-linux-aarch64.tar.gz"
-      sha256 "f6c48242acde20ee4349b10d9de80c875e60027aa092de1d9f522afd82249a1a"
+      sha256 "1eb1c44188b24365f23d17ba1e89ba09a88da938e34548593144d93934c151aa"
     else
       url "https://github.com/reftonull/skillsync/releases/download/v#{version}/skillsync-linux-x86_64.tar.gz"
-      sha256 "42c746a695cbef474c3ff12447d64740e52e38abf9c882ec2340a0e7078a86d8"
+      sha256 "35a751c9566c124f1cbcfb6ad1c9ae1593a1a96b40ca85f9dd4cfd4b5033c8f1"
     end
   end
 
   def install
     bin.install "skillsync"
+    generate_completions_from_executable(bin/"skillsync", "--generate-completion-script")
   end
 
   test do
